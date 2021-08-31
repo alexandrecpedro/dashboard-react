@@ -1,6 +1,17 @@
+import { useState } from 'react';
 import dummyAvatar from '../images/dummy-avatar.jpg';
 
 function Topbar() {
+  const [messages, setMessages] = useState(5);
+  const [alertas, setAlertas] = useState(3);
+  function alteraMensagem(event) {
+    event.preventDefault();
+    setMessages(messages + 1);
+  }
+  function alteraNotificacao(event) {
+    event.preventDefault();
+    setAlertas(alertas + 1);
+  }
   return (
     <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
       {/* <!-- Sidebar Toggle (Topbar) --> */}
@@ -15,10 +26,10 @@ function Topbar() {
       <ul className="navbar-nav ml-auto">
         {/* <!-- Nav Item - Alerts --> */}
         <li className="nav-item dropdown no-arrow mx-1">
-          <a className="nav-link dropdown-toggle" href="/" id="alertsDropdown">
+          <a className="nav-link dropdown-toggle" href="/" id="alertsDropdown" onClick={alteraNotificacao}>
             <i className="fas fa-bell fa-fw"></i>
             {/* <!-- Counter - Alerts --> */}
-            <span className="badge badge-danger badge-counter">3+</span>
+            <span className="badge badge-danger badge-counter">{alertas>=10 ? `${alertas}+` : (alertas)}</span>
           </a>
         </li>
 
@@ -27,11 +38,11 @@ function Topbar() {
           <a
             className="nav-link dropdown-toggle"
             href="/"
-            id="messagesDropdown"
+            id="messagesDropdown" onClick={alteraMensagem}
           >
             <i className="fas fa-envelope fa-fw"></i>
             {/* <!-- Counter - Messages --> */}
-            <span className="badge badge-danger badge-counter">7</span>
+            <span className="badge badge-danger badge-counter">{messages}</span>
           </a>
         </li>
 
